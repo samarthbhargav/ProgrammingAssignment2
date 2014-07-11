@@ -23,7 +23,7 @@ makeCacheMatrix <- function(mat = matrix()) {
     }
     # function that gets the inverse of the matrix
     getinverse <- function() {
-      # in my opinion, cacheSolve should be called here. More OOP-y
+      # imo, cacheSolve should be called here. More OOP-y
       return(inverse)
     }
     
@@ -40,11 +40,13 @@ cacheSolve <- function(mat, ...) {
   
     # first, check if inverse has been computed, if no, compute
     if(is.null(mat$getinverse())) { # inverse has not been computed
-      
+
       # get the inverse
       inverse <- solve(mat$get()) 
       # cache it
       mat$setinverse(inverse)
+    } else {
+      message("getting cached data")
     }
     
     return(mat$getinverse())
@@ -52,7 +54,7 @@ cacheSolve <- function(mat, ...) {
 
 
 ##### Tests ##### 
-# uncomment to test
+# comment out the message("getting cached data") before running this test
 
 # create a 10x10 matrix
 mat <- makeCacheMatrix(matrix(rnorm(100), c(10,10)))
